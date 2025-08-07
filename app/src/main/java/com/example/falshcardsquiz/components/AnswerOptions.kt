@@ -14,8 +14,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AnswerOptions(options:List<String>) {
-    options.forEach { opt ->
+    var options_ = options.shuffled()
 
+    options_.forEach { opt ->
         Button({},    colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF3F5C95), // Background color
             contentColor = Color.White, // Text/icon color
