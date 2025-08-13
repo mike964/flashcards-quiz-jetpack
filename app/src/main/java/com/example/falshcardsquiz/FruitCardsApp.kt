@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,20 +34,22 @@ fun FruitCardsApp(cards: List<Card>,  viewModel: FlashcardsViewModel = viewModel
     val uiState by viewModel.uiState.collectAsState()
 
     // State to hold the counter value
-    var count by remember { mutableStateOf(0) }
+    var count by remember { mutableIntStateOf(0) }
     val currentImageResId by remember { mutableStateOf(R.drawable.apple) }
 
     val possibleAnswers = cards.map { it.name }.shuffled().slice(0..3)
+    val correctAnswer = cards[count]
     var answerOptions: MutableList<String> = mutableListOf()
     answerOptions.addAll(possibleAnswers)
 
     // # Check if the answer card exist
 //    val hasApple = myList.contains("apple") // true
 
-val hasAnswer = possibleAnswers.contains(cards[count].name)
+val hasAnswer = possibleAnswers.contains(correctAnswer.name)
 
-    if(!hasAnswer)
-    answerOptions.add(0,cards[count].name)
+    if(!hasAnswer) {
+        answerOptions.add(0, correctAnswer.name)
+    }
 
     Log.d("xxc", possibleAnswers.toString())
     Log.d("xxc", answerOptions.toString())
