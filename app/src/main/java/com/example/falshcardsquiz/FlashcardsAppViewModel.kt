@@ -27,7 +27,7 @@ class FlashcardsViewModel() : ViewModel() {
     }
     fun resetCounter() {
         _uiState.update { currentState ->
-            currentState.copy(count = 0)
+            currentState.copy(count = 0 , score = 0 )
         }
     }
     fun incrementScore() {

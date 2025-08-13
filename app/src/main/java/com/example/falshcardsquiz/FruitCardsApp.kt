@@ -91,7 +91,7 @@ fun FruitCardsApp(cards: List<Card>, viewModel: FlashcardsViewModel = viewModel(
 //            }
 
 
-            AnswerOptions(answerOptions, correctAnswer)
+            AnswerOptions(answerOptions, correctAnswer, count)
 
 
             Text("Score: ${uiState.score}")
