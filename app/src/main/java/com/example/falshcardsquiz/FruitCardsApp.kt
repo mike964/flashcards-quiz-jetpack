@@ -33,10 +33,17 @@ fun FruitCardsApp(cards: List<Card>) {
     var count by remember { mutableStateOf(0) }
     val currentImageResId by remember { mutableStateOf(R.drawable.apple) }
 
-    val possibleAnswers = cards.map { it.name }.shuffled().slice(0..2)
+    val possibleAnswers = cards.map { it.name }.shuffled().slice(0..3)
     var answerOptions: MutableList<String> = mutableListOf()
     answerOptions.addAll(possibleAnswers)
-    answerOptions.add(cards[count].name)
+
+    // # Check if the answer card exist
+//    val hasApple = myList.contains("apple") // true
+
+val hasAnswer = possibleAnswers.contains(cards[count].name)
+
+    if(!hasAnswer)
+    answerOptions.add(0,cards[count].name)
 
     Log.d("xxc", possibleAnswers.toString())
     Log.d("xxc", answerOptions.toString())
@@ -52,7 +59,7 @@ fun FruitCardsApp(cards: List<Card>) {
                 (count + 1) / cards.size.toFloat()
             )
 
-            Text(count.toString())
+            Text((count+1).toString())
             Spacer(modifier = Modifier.padding(8.dp))
 //            Text((count / cards.size.toFloat()).toString())
 //            Text((count+1).toString()+"/" + (shuffledCards.size).toString(), modifier = Modifier.padding(8.dp))
