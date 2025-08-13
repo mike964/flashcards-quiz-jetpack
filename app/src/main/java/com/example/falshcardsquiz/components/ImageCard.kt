@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun ImageCard(imageId: Int, name: String = "Fruit") {
+fun ImageCard(card: Card) {
 
 
     Card(
@@ -44,12 +44,12 @@ fun ImageCard(imageId: Int, name: String = "Fruit") {
         ) {
             Image(
 //                       painter = painterResource(id = R.drawable.banana),
-                painter = painterResource(imageId),
+                painter = painterResource(card.imageId),
                 contentDescription = "apple",
                 modifier = Modifier.padding(12.dp)
             )
             Text(
-                text = name,
+                text = card.name,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(10.dp)

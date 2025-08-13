@@ -27,7 +27,7 @@ import com.example.falshcardsquiz.components.LinearProgressBar
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun FruitCardsApp(cards: List<Card>,  viewModel: FlashcardsViewModel = viewModel()) {
+fun FruitCardsApp(cards: List<Card>, viewModel: FlashcardsViewModel = viewModel()) {
     // # import view model
     val uiState by viewModel.uiState.collectAsState()
     val count = uiState.count
@@ -44,9 +44,9 @@ fun FruitCardsApp(cards: List<Card>,  viewModel: FlashcardsViewModel = viewModel
     // # Check if the answer card exist
 //    val hasApple = myList.contains("apple") // true
 
-val hasAnswer = possibleAnswers.contains(correctAnswer)
+    val hasAnswer = possibleAnswers.contains(correctAnswer)
 
-    if(!hasAnswer) {
+    if (!hasAnswer) {
         answerOptions.add(0, correctAnswer)
     }
 
@@ -64,12 +64,13 @@ val hasAnswer = possibleAnswers.contains(correctAnswer)
                 (count + 1) / cards.size.toFloat()
             )
 
-            Text((count+1).toString())
+            Text((count + 1).toString())
             Spacer(modifier = Modifier.padding(8.dp))
 //            Text((count / cards.size.toFloat()).toString())
 //            Text((count+1).toString()+"/" + (shuffledCards.size).toString(), modifier = Modifier.padding(8.dp))
 
-            ImageCard(cards[count].imageId, cards[count].name)
+
+            ImageCard(cards[count])
 
             Button(
                 onClick = {
@@ -91,7 +92,6 @@ val hasAnswer = possibleAnswers.contains(correctAnswer)
 
 
             AnswerOptions(answerOptions, correctAnswer)
-
 
 
             Text("Score: ${uiState.score}")
