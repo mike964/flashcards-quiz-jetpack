@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.update
 data class GameUiState (
     val currentScrambledWord: String = "",
     val currentWordCount: Int = 1,
+    val count : Int = 0 ,  // cards counter
     val score: Int = 0,
     val isGuessedWordWrong: Boolean = false,
     val isGameOver: Boolean = false
@@ -19,10 +20,19 @@ class FlashcardsViewModel() : ViewModel() {
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
 
+    fun incrementCounter() {
+        _uiState.update { currentState ->
+            currentState.copy(count = currentState.count + 1)
+        }
+    }
+    fun resetCounter() {
+        _uiState.update { currentState ->
+            currentState.copy(count = 0)
+        }
+    }
     fun incrementScore() {
         _uiState.update { currentState ->
             currentState.copy(score = currentState.score + 10)
         }
     }
-
 }

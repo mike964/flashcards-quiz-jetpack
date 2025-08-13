@@ -1,6 +1,7 @@
 package com.example.falshcardsquiz.components
 
 
+import android.util.Log
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -13,14 +14,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AnswerOptions(options:List<String>) {
+fun AnswerOptions(options: List<Card>, correctAnswer: Card) {
     var options_ = options.slice(0..3).shuffled()
 
     options_.forEach { opt ->
-        Button({},    colors = ButtonDefaults.buttonColors(
+        Button({
+            Log.d("xxc", opt.toString())
+            Log.d("xxc", correctAnswer.toString())
+        },    colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF3F5C95), // Background color
             contentColor = Color.White, // Text/icon color
-        ), modifier = Modifier.width(160.dp)) { Text(text = opt) }
+        ), modifier = Modifier.width(160.dp)) { Text(text = opt.name) }
         Spacer(modifier = Modifier.height(8.dp))
     }
 }

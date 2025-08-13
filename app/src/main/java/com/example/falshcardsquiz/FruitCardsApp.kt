@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,23 +30,24 @@ import com.example.falshcardsquiz.components.LinearProgressBar
 fun FruitCardsApp(cards: List<Card>,  viewModel: FlashcardsViewModel = viewModel()) {
     // # import view model
     val uiState by viewModel.uiState.collectAsState()
+    val count = uiState.count
 
     // State to hold the counter value
-    var count by remember { mutableIntStateOf(0) }
+//    var count by remember { mutableIntStateOf(0) }
     val currentImageResId by remember { mutableStateOf(R.drawable.apple) }
 
-    val possibleAnswers = cards.map { it.name }.shuffled().slice(0..3)
+    val possibleAnswers: List<Card> = cards.shuffled().slice(0..3)
     val correctAnswer = cards[count]
-    var answerOptions: MutableList<String> = mutableListOf()
+    var answerOptions: MutableList<Card> = mutableListOf()
     answerOptions.addAll(possibleAnswers)
 
     // # Check if the answer card exist
 //    val hasApple = myList.contains("apple") // true
 
-val hasAnswer = possibleAnswers.contains(correctAnswer.name)
+val hasAnswer = possibleAnswers.contains(correctAnswer)
 
     if(!hasAnswer) {
-        answerOptions.add(0, correctAnswer.name)
+        answerOptions.add(0, correctAnswer)
     }
 
     Log.d("xxc", possibleAnswers.toString())
@@ -75,21 +74,23 @@ val hasAnswer = possibleAnswers.contains(correctAnswer.name)
             Button(
                 onClick = {
                     if (count == 9) {
-                        count = 0
+//                        count = 0
+                        viewModel.resetCounter()
                     } else {
-                        count++
+//                        count++
+                        viewModel.incrementCounter()
                         viewModel.incrementScore()
                     }
                 },
                 modifier = Modifier.padding(10.dp)
             ) { Text("Next") }
 
-            Button(onClick = { count-- }) {
-                Text("Prev")
-            }
+//            Button(onClick = { count-- }) {
+//                Text("Prev")
+//            }
 
 
-            AnswerOptions(answerOptions)
+            AnswerOptions(answerOptions, correctAnswer)
 
 
 
