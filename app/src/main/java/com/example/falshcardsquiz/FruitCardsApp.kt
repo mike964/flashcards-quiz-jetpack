@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.falshcardsquiz.components.AnswerOptions
 import com.example.falshcardsquiz.components.Card
 import com.example.falshcardsquiz.components.ImageCard
@@ -26,8 +28,9 @@ import com.example.falshcardsquiz.components.LinearProgressBar
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun FruitCardsApp(cards: List<Card>) {
-
+fun FruitCardsApp(cards: List<Card>,  viewModel: FlashcardsViewModel = viewModel()) {
+    // # import view model
+    val uiState by viewModel.uiState.collectAsState()
 
     // State to hold the counter value
     var count by remember { mutableStateOf(0) }
@@ -72,6 +75,7 @@ val hasAnswer = possibleAnswers.contains(cards[count].name)
                         count = 0
                     } else {
                         count++
+                        viewModel.incrementScore()
                     }
                 },
                 modifier = Modifier.padding(10.dp)
@@ -83,6 +87,10 @@ val hasAnswer = possibleAnswers.contains(cards[count].name)
 
 
             AnswerOptions(answerOptions)
+
+
+
+            Text("Score: ${uiState.score}")
         }
     }
 }
