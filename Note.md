@@ -5,4 +5,5 @@
 ---
 
 - [x] Push to Github
-- [ ] Add Simple Navigation - Choose options before Quiz starts
+- [x] Add Simple Navigation - Choose options before Quiz starts | 9:47 PM 9/5/2025
+- [x] Move to Score screen when the Quiz ends
