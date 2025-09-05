@@ -4,5 +4,5 @@
 
 ---
 
-[x] Push to Github
-[] Add Simple Navigation
+- [x] Push to Github
+- [ ] Add Simple Navigation - Choose options before Quiz starts
