@@ -1,4 +1,5 @@
 package com.example.falshcardsquiz.screens
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,18 +20,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 // define setting for the quiz before start
 
 
 @Composable
-fun StartScreen(onNavigateToQuiz: () -> Unit) {
+fun StartScreen(navController: NavHostController) {
 
 
-
-    Column (
+    Column(
         modifier = Modifier.fillMaxWidth(), // Occupy the maximum available width
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -40,11 +40,19 @@ fun StartScreen(onNavigateToQuiz: () -> Unit) {
 
         CheckboxMinimalExample()
 
-        Button(onClick = onNavigateToQuiz,  colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Blue, // Sets the background color of the button
-            contentColor = Color.White // Sets the color of the content (e.g., Text) inside the button
-        )) {
+        Button(
+            onClick = { navController.navigate("quiz") },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Blue, // Sets the background color of the button
+                contentColor = Color.White // Sets the color of the content (e.g., Text) inside the button
+            )
+        ) {
             Text("Start")
+        }
+        Button(onClick = {
+            navController.navigate("quiz-end")
+        }) {
+            Text("Quiz End Screen")
         }
     }
 }
@@ -56,7 +64,8 @@ fun CheckboxMinimalExample() {
 
     Column(modifier = Modifier.padding(12.dp)) {
         Button(onClick = {}, modifier = Modifier.width(200.dp)) {
-            Text("Animals")}
+            Text("Animals")
+        }
 
         OptionItem("Animals")
         OptionItem("Fruits")
@@ -64,7 +73,7 @@ fun CheckboxMinimalExample() {
         OptionItem("Mix")
 
         Row(
-        verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 "Timer"
@@ -83,7 +92,8 @@ fun CheckboxMinimalExample() {
 }
 
 @Composable
-fun OptionItem  (text:String , onClick: () -> Unit = {}){
+fun OptionItem(text: String, onClick: () -> Unit = {}) {
     Button(onClick = {}, modifier = Modifier.width(200.dp)) {
-        Text(text)}
+        Text(text)
+    }
 }

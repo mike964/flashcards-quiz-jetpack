@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.falshcardsquiz.screens.QuizScreen
 import com.example.falshcardsquiz.screens.StartScreen
+import com.example.falshcardsquiz.screens.QuizEndScreen
 
 @Composable
 fun AppNavigation() {
@@ -18,10 +19,17 @@ fun AppNavigation() {
 //            HomeScreen(onNavigateToDetail = { navController.navigate("detail") })
 //        }
         composable("start") {
-            StartScreen(onNavigateToQuiz = { navController.navigate("quiz") })
+            StartScreen(navController = navController)
         }
         composable("quiz") {
-            QuizScreen(onNavigateBack = { navController.popBackStack() })
+            QuizScreen(
+//                onNavigateBack = { navController.popBackStack() }
+                navController = navController
+            )
         }
+        composable("quiz-end") {
+            QuizEndScreen(navController = navController )
+        }
+
     }
 }

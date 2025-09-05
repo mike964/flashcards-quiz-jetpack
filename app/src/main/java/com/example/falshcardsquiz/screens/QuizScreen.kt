@@ -1,13 +1,14 @@
 package com.example.falshcardsquiz.screens
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import com.example.falshcardsquiz.FruitCardsApp
 import com.example.falshcardsquiz.R
 import com.example.falshcardsquiz.components.Card
 
 // # This is using state hoisting
 @Composable
-fun QuizScreen(onNavigateBack: () -> Boolean) {
+fun QuizScreen(navController: NavHostController) {
     val fruits = listOf(
         Card("Apple", R.drawable.apple, "35345434") ,
         Card("Banana", R.drawable.banana ,"35234434"),
@@ -51,5 +52,5 @@ fun QuizScreen(onNavigateBack: () -> Boolean) {
     var cards = fruits.plus(animals)
     val shuffledCards = cards.shuffled().slice(0..9)
 
-    FruitCardsApp(shuffledCards)
+    FruitCardsApp(shuffledCards, navController = navController)
 }

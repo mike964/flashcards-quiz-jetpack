@@ -18,7 +18,7 @@ import com.example.falshcardsquiz.FlashcardsViewModel
 @Composable
 fun AnswerOptions(
     options: List<Card>,
-    correctAnswer: Card,
+    correctAnswer: Card ,
     count: Int,
     vm: FlashcardsViewModel = viewModel(),
 ) {
@@ -30,15 +30,9 @@ fun AnswerOptions(
                 Log.d("xxc", opt.toString())
                 Log.d("xxc", correctAnswer.toString())
 
-                if (count == 9) {
-//                        count = 0
-                    vm.resetCounter()
-                } else {
-//                        count++
-                    vm.incrementCounter()
-                    if (correctAnswer.id == opt.id) {
-                        vm.incrementScore()
-                    }
+                vm.incrementCounter()
+                if (correctAnswer.id == opt.id) {
+                    vm.incrementScore()
                 }
 
             }, colors = ButtonDefaults.buttonColors(
